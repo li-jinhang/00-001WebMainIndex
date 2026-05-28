@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目导航门户</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #09090c;
+            --panel: rgba(18, 20, 26, 0.78);
+            --panel-strong: rgba(22, 24, 31, 0.94);
+            --line: rgba(255, 255, 255, 0.1);
+            --line-strong: rgba(232, 194, 112, 0.35);
+            --text: #f5f1e8;
+            --muted: #aaa49b;
+            --gold: #e8c270;
+            --gold-soft: rgba(232, 194, 112, 0.16);
+            --cyan: #7fe6d3;
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --max-width: 1280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "IBM Plex Sans", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 15% 20%, rgba(127, 230, 211, 0.16), transparent 30%),
+                radial-gradient(circle at 85% 18%, rgba(232, 194, 112, 0.18), transparent 28%),
+                radial-gradient(circle at 50% 120%, rgba(92, 113, 255, 0.18), transparent 38%),
+                linear-gradient(135deg, #07080b 0%, #0b0d12 45%, #11141c 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: radial-gradient(circle at center, black 48%, transparent 95%);
+            opacity: 0.45;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .shell {
+            width: min(calc(100% - 32px), var(--max-width));
+            margin: 24px auto;
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 36px;
+            background: rgba(8, 9, 14, 0.68);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            border: 1px solid rgba(232, 194, 112, 0.3);
+            background: linear-gradient(145deg, rgba(232, 194, 112, 0.18), rgba(127, 230, 211, 0.08));
+            color: var(--gold);
+            font-size: 1.05rem;
+            letter-spacing: 0.12em;
+        }
+
+        .brand-copy small,
+        .eyebrow,
+        .meta-label,
+        .card-index,
+        .card-link,
+        .pill {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.72rem;
+        }
+
+        .brand-copy small,
+        .meta-label,
+        .card-index,
+        .pill {
+            color: var(--muted);
+        }
+
+        .brand-copy h1,
+        .hero-title,
+        .section-title {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 600;
+        }
+
+        .brand-copy h1 {
+            font-size: 1.35rem;
+            letter-spacing: 0.04em;
+        }
+
+        .status-panel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 0 6px rgba(127, 230, 211, 0.12);
+        }
+
+        .status-time {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .hero {
+            display: block;
+            padding: 28px 0 24px;
+        }
+
+        .hero-panel,
+        .card,
+        .spotlight,
+        .updates-panel,
+        .update-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--line);
+            background: var(--panel);
+        }
+
+        .hero-panel {
+            padding: 36px;
+            background:
+                linear-gradient(135deg, rgba(232, 194, 112, 0.12), transparent 38%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 100%),
+                var(--panel-strong);
+        }
+
+        .hero-panel::after,
+        .card::after,
+        .spotlight::after,
+        .updates-panel::after,
+        .update-item::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 34px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .hero-title {
+            max-width: 10ch;
+            font-size: clamp(3.2rem, 8vw, 6.8rem);
+            line-height: 0.92;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            max-width: 640px;
+            margin-top: 18px;
+            color: #d4cec5;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .button.primary {
+            color: #18120b;
+            background: linear-gradient(135deg, #f2d08b, #d8ad51);
+            box-shadow: 0 12px 30px rgba(216, 173, 81, 0.24);
+        }
+
+        .button.secondary {
+            border-color: var(--line);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+        }
+
+        .button:hover,
+        .button:focus-visible,
+        .card:hover,
+        .card:focus-visible,
+        .spotlight:hover,
+        .spotlight:focus-visible {
+            transform: translateY(-3px);
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .meta-box {
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .meta-box strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .cards-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 10px 4px 20px;
+        }
+
+        .cards-header p {
+            max-width: 560px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            min-height: 250px;
+            padding: 24px;
+            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+        }
+
+        .card:hover,
+        .card:focus-visible,
+        .spotlight:hover,
+        .spotlight:focus-visible {
+            border-color: var(--line-strong);
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .card.featured {
+            grid-column: span 1;
+            min-height: 320px;
+            background:
+                radial-gradient(circle at 90% 15%, rgba(232, 194, 112, 0.17), transparent 30%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 100%),
+                var(--panel-strong);
+        }
+
+        .card.compact {
+            grid-column: span 1;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            font-size: 1.25rem;
+        }
+
+        .card h3 {
+            margin-top: 26px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .card p {
+            margin-top: 10px;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 0.97rem;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 26px;
+        }
+
+        .card-link {
+            color: var(--gold);
+        }
+
+        .card-tag {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #d6d0c7;
+            font-size: 0.82rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .updates-section {
+            margin-top: 34px;
+        }
+
+        .updates-panel {
+            padding: 28px;
+            background:
+                radial-gradient(circle at 8% 12%, rgba(232, 194, 112, 0.12), transparent 26%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 100%),
+                var(--panel-strong);
+        }
+
+        .updates-top {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .updates-top p {
+            max-width: 620px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .updates-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .update-item {
+            min-height: 210px;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+        }
+
+        .update-item:hover,
+        .update-item:focus-visible {
+            transform: translateY(-3px);
+            border-color: var(--line-strong);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .update-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold);
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .update-date::before {
+            content: "";
+            width: 26px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .update-item h3 {
+            margin-top: 18px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.85rem;
+            font-weight: 600;
+        }
+
+        .update-item p {
+            margin-top: 10px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .update-tag {
+            display: inline-flex;
+            margin-top: 18px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: #d6d0c7;
+            font-size: 0.8rem;
+        }
+
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 20px;
+            padding: 22px 6px 6px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 1080px) {
+            .card.featured,
+            .card.compact {
+                grid-column: span 6;
+            }
+
+            .updates-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .shell {
+                width: min(calc(100% - 20px), var(--max-width));
+                margin: 10px auto;
+                padding: 18px;
+                border-radius: 24px;
+            }
+
+            .topbar,
+            .cards-header,
+            .footer-note {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-panel,
+            .updates-panel {
+                padding: 22px;
+            }
+
+            .hero-title {
+                max-width: 100%;
+                font-size: clamp(2.8rem, 16vw, 4.8rem);
+            }
+
+            .hero-meta,
+            .card-grid,
+            .updates-list {
+                grid-template-columns: 1fr;
+            }
+
+            .card.featured,
+            .card.compact {
+                grid-column: span 1;
+            }
+
+            .updates-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-mark">WM</div>
+                <div class="brand-copy">
+                    <small>WebMainIndex</small>
+                    <h1>李金航-项目导航门户</h1>
+                </div>
+            </div>
+            <div class="status-panel">
+                <span class="status-dot"></span>
+                <span class="status-time" id="statusTime">正在同步...</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <article class="hero-panel">
+                <span class="eyebrow">Project Recommendation</span>
+                <h2 class="hero-title"><em>Easyplay</em></h2>
+                <p class="hero-desc">
+                    和朋友来一局中国象棋！
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" href="http://117.72.10.87:26002">进入 EasyPlay</a>
+                    <a class="button secondary" href="#module-entry">浏览其他项目</a>
+                </div>
+                <div class="hero-meta">
+                    <div class="meta-box">
+                        <span class="meta-label">中国象棋</span>
+                        <strong>在线实时对局</strong>
+                    </div>
+                    <div class="meta-box">
+                        <span class="meta-label">斗地主</span>
+                        <strong>互动娱乐体验</strong>
+                    </div>
+                    <div class="meta-box">
+                        <span class="meta-label">单机游戏</span>
+                        <strong>重温经典</strong>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="module-entry">
+            <div class="cards-header">
+                <div>
+                    <span class="eyebrow">Project Access</span>
+                    <h2 class="section-title">项目入口</h2>
+                    <p>点击项目名称进入您感兴趣的项目详情页。</p>
+                </div>
+                <div class="pill-group">
+                    <span class="pill">Portal Index</span>
+                    <span class="pill">Visual Refresh</span>
+                    <span class="pill">Responsive Ready</span>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <a class="card featured" href="http://117.72.10.87:26002">
+                    <div class="card-head">
+                        <span class="card-index">01 / Featured</span>
+                        <div class="card-icon">EP</div>
+                    </div>
+                    <h3>EasyPlay</h3>
+                    <p>小游戏算法实现。</p>
+                    <div class="card-footer">
+                        <span class="card-link">Launch Project</span>
+                        <span class="card-tag">Web App</span>
+                    </div>
+                </a>
+
+                <a class="card compact" href="./26-005ImageProcesser/frontend/index.html">
+                    <div class="card-head">
+                        <span class="card-index">02 / Tool</span>
+                        <div class="card-icon">IP</div>
+                    </div>
+                    <h3>基础图像处理器</h3>
+                    <p>用于图像基础操作和处理流程测试。</p>
+                    <div class="card-footer">
+                        <span class="card-link">Open Module</span>
+                        <span class="card-tag">Utility</span>
+                    </div>
+                </a>
+
+                <a class="card compact" href="./26-004JavaCoder/frontend/index.html">
+                    <div class="card-head">
+                        <span class="card-index">03 / Build</span>
+                        <div class="card-icon">JC</div>
+                    </div>
+                    <h3>代码自动判题平台</h3>
+                    <p>用于代码提交、判题与平台验证，当前仍在测试阶段。</p>
+                    <div class="card-footer">
+                        <span class="card-link">Open Module</span>
+                        <span class="card-tag">Testing</span>
+                    </div>
+                </a>
+
+                <a class="card compact" href="/RateConverter">
+                    <div class="card-head">
+                        <span class="card-index">04 / Service</span>
+                        <div class="card-icon">RC</div>
+                    </div>
+                    <h3>货币汇率转换器</h3>
+                    <p>实时汇率换算服务，适合做快捷工具型访问入口。</p>
+                    <div class="card-footer">
+                        <span class="card-link">Open Module</span>
+                        <span class="card-tag">Live Data</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="updates-section">
+            <div class="updates-panel">
+                <div class="updates-top">
+                    <div>
+                        <span class="eyebrow">Recent Changes</span>
+                        <h2 class="section-title">更新</h2>
+                    </div>
+                    <p>更新记录已改为独立 JSON 数据源驱动，后续只需维护数据文件，就能同步刷新首页中的变更日志内容。</p>
+                </div>
+
+                <div class="updates-list" id="updatesList">
+                    <article class="update-item">
+                        <span class="update-date">Loading</span>
+                        <h3>正在加载更新</h3>
+                        <p>页面正在读取独立的更新数据文件，请稍候。</p>
+                        <span class="update-tag">Data Driven</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-note">
+            <span>Designed as a curated launchpad for your local and remote web projects.</span>
+            <span id="statusDate">--</span>
+        </footer>
+    </main>
+
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
