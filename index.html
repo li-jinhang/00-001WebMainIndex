@@ -6,25 +6,28 @@
     <title>项目导航门户</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            color-scheme: dark;
-            --bg: #09090c;
-            --panel: rgba(18, 20, 26, 0.78);
-            --panel-strong: rgba(22, 24, 31, 0.94);
-            --line: rgba(255, 255, 255, 0.1);
-            --line-strong: rgba(232, 194, 112, 0.35);
-            --text: #f5f1e8;
-            --muted: #aaa49b;
-            --gold: #e8c270;
-            --gold-soft: rgba(232, 194, 112, 0.16);
-            --cyan: #7fe6d3;
-            --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
-            --radius-xl: 32px;
-            --radius-lg: 24px;
-            --radius-md: 18px;
-            --max-width: 1280px;
+            color-scheme: light;
+            --bg: #f7f3ea;
+            --paper: rgba(255, 252, 244, 0.86);
+            --paper-strong: #fffdf7;
+            --ink: #26312e;
+            --muted: #6d7772;
+            --line: rgba(38, 49, 46, 0.12);
+            --line-strong: rgba(37, 130, 112, 0.34);
+            --mint: #258270;
+            --mint-soft: rgba(37, 130, 112, 0.1);
+            --sky: #3f8fc1;
+            --apricot: #f2b36d;
+            --rose: #e77f7a;
+            --lavender: #8977d1;
+            --shadow: 0 18px 54px rgba(71, 88, 82, 0.14);
+            --radius-xl: 30px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --max-width: 1180px;
         }
 
         * {
@@ -39,13 +42,12 @@
 
         body {
             min-height: 100vh;
-            font-family: "IBM Plex Sans", sans-serif;
-            color: var(--text);
+            font-family: "Noto Sans SC", sans-serif;
+            color: var(--ink);
             background:
-                radial-gradient(circle at 15% 20%, rgba(127, 230, 211, 0.16), transparent 30%),
-                radial-gradient(circle at 85% 18%, rgba(232, 194, 112, 0.18), transparent 28%),
-                radial-gradient(circle at 50% 120%, rgba(92, 113, 255, 0.18), transparent 38%),
-                linear-gradient(135deg, #07080b 0%, #0b0d12 45%, #11141c 100%);
+                radial-gradient(circle at 10% 12%, rgba(63, 143, 193, 0.18), transparent 28%),
+                radial-gradient(circle at 86% 6%, rgba(242, 179, 109, 0.2), transparent 24%),
+                linear-gradient(135deg, #f8f3e7 0%, #eef7f2 48%, #f8f4eb 100%);
             overflow-x: hidden;
         }
 
@@ -55,11 +57,10 @@
             inset: 0;
             pointer-events: none;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 72px 72px;
-            mask-image: radial-gradient(circle at center, black 48%, transparent 95%);
-            opacity: 0.45;
+                linear-gradient(rgba(38, 49, 46, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(38, 49, 46, 0.045) 1px, transparent 1px);
+            background-size: 36px 36px;
+            mask-image: linear-gradient(180deg, black, transparent 86%);
         }
 
         a {
@@ -70,40 +71,48 @@
         .shell {
             width: min(calc(100% - 32px), var(--max-width));
             margin: 24px auto;
-            padding: 28px;
-            border: 1px solid var(--line);
-            border-radius: 36px;
-            background: rgba(8, 9, 14, 0.68);
-            backdrop-filter: blur(18px);
-            box-shadow: var(--shadow);
+            padding: 22px;
         }
 
         .topbar {
+            position: sticky;
+            top: 14px;
+            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding-bottom: 22px;
-            border-bottom: 1px solid var(--line);
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 253, 247, 0.78);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 12px 36px rgba(71, 88, 82, 0.09);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            min-width: 0;
         }
 
         .brand-mark {
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             display: grid;
+            flex: 0 0 auto;
             place-items: center;
-            border-radius: 14px;
-            border: 1px solid rgba(232, 194, 112, 0.3);
-            background: linear-gradient(145deg, rgba(232, 194, 112, 0.18), rgba(127, 230, 211, 0.08));
-            color: var(--gold);
-            font-size: 1.05rem;
-            letter-spacing: 0.12em;
+            border-radius: 16px;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -0.06em;
+            background: conic-gradient(from 160deg, var(--mint), var(--sky), var(--apricot), var(--mint));
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+        }
+
+        .brand-copy {
+            min-width: 0;
         }
 
         .brand-copy small,
@@ -111,10 +120,12 @@
         .meta-label,
         .card-index,
         .card-link,
-        .pill {
+        .pill,
+        .update-date {
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.12em;
             font-size: 0.72rem;
+            font-weight: 700;
         }
 
         .brand-copy small,
@@ -126,110 +137,250 @@
 
         .brand-copy h1,
         .hero-title,
-        .section-title {
-            font-family: "Cormorant Garamond", serif;
-            font-weight: 600;
+        .section-title,
+        .card h3,
+        .update-item h3 {
+            font-family: "Literata", "Noto Sans SC", serif;
+            font-weight: 700;
         }
 
         .brand-copy h1 {
-            font-size: 1.35rem;
-            letter-spacing: 0.04em;
+            margin-top: 2px;
+            overflow: hidden;
+            font-size: 1.04rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .status-panel {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
+            gap: 10px;
+            flex: 0 0 auto;
+            padding: 10px 14px;
             border-radius: 999px;
-            border: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--mint-soft);
+            color: var(--mint);
         }
 
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: var(--cyan);
-            box-shadow: 0 0 0 6px rgba(127, 230, 211, 0.12);
+            background: var(--mint);
+            box-shadow: 0 0 0 6px rgba(37, 130, 112, 0.12);
         }
 
         .status-time {
-            font-size: 0.95rem;
-            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .hero {
-            display: block;
-            padding: 28px 0 24px;
+            padding: 44px 0 24px;
         }
 
         .hero-panel,
         .card,
-        .spotlight,
         .updates-panel,
         .update-item {
             position: relative;
             overflow: hidden;
-            border-radius: var(--radius-xl);
             border: 1px solid var(--line);
-            background: var(--panel);
+            background: var(--paper);
+            box-shadow: var(--shadow);
         }
 
         .hero-panel {
-            padding: 36px;
-            background:
-                linear-gradient(135deg, rgba(232, 194, 112, 0.12), transparent 38%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 100%),
-                var(--panel-strong);
+            display: grid;
+            grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+            gap: 28px;
+            align-items: stretch;
+            padding: 26px;
+            border-radius: var(--radius-xl);
         }
 
-        .hero-panel::after,
-        .card::after,
-        .spotlight::after,
-        .updates-panel::after,
-        .update-item::after {
+        .hero-copy {
+            min-height: 386px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 34px;
+            border-radius: 24px;
+            background:
+                linear-gradient(135deg, rgba(37, 130, 112, 0.1), transparent 50%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.42));
+        }
+
+        .hero-board {
+            min-height: 386px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 24% 24%, rgba(63, 143, 193, 0.14), transparent 30%),
+                radial-gradient(circle at 82% 18%, rgba(231, 127, 122, 0.14), transparent 24%),
+                linear-gradient(160deg, rgba(255, 255, 255, 0.85), rgba(244, 239, 228, 0.82));
+        }
+
+        .xiangqi-stage {
+            width: 100%;
+            display: grid;
+            gap: 18px;
+        }
+
+        .xiangqi-copy {
+            padding: 0 4px;
+        }
+
+        .xiangqi-copy strong {
+            display: block;
+            font-family: "Literata", "Noto Sans SC", serif;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .xiangqi-copy span {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .xiangqi-scene {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            perspective: 1600px;
+        }
+
+        .xiangqi-scene::before {
             content: "";
             position: absolute;
-            inset: 1px;
-            border-radius: inherit;
-            pointer-events: none;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            width: 82%;
+            height: 32px;
+            bottom: 12px;
+            border-radius: 50%;
+            background: rgba(38, 49, 46, 0.2);
+            filter: blur(18px);
+        }
+
+        .xiangqi-board {
+            position: relative;
+            width: min(100%, 360px);
+            aspect-ratio: 5 / 5.6;
+            border-radius: 26px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 36%),
+                linear-gradient(180deg, #f2c993 0%, #e9bb80 100%);
+            border: 1px solid rgba(103, 63, 28, 0.16);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 247, 230, 0.48),
+                0 22px 42px rgba(98, 68, 39, 0.22);
+            transform-style: preserve-3d;
+            transform: rotateX(62deg) rotateZ(-36deg);
+        }
+
+        .xiangqi-board::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 18px;
+            background-image:
+                linear-gradient(to right, rgba(92, 57, 31, 0.42) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(92, 57, 31, 0.42) 2px, transparent 2px);
+            background-size: calc(100% / 8) 100%, 100% calc(100% / 9);
+            background-position: 0 0, 0 0;
+            box-shadow: inset 0 0 0 2px rgba(92, 57, 31, 0.24);
+        }
+
+        .xiangqi-board::after {
+            content: "楚河                              汉界";
+            position: absolute;
+            left: 34px;
+            right: 34px;
+            top: calc(50% - 16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            color: rgba(92, 57, 31, 0.7);
+            font-family: "Literata", "Noto Sans SC", serif;
+            font-size: 1rem;
+            letter-spacing: 0.36em;
+            background: rgba(244, 226, 196, 0.82);
+            border-top: 1px solid rgba(92, 57, 31, 0.18);
+            border-bottom: 1px solid rgba(92, 57, 31, 0.18);
+            transform: translateZ(2px);
+        }
+
+        .xiangqi-piece {
+            position: absolute;
+            left: var(--x);
+            top: var(--y);
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            font-family: "Literata", "Noto Sans SC", serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            transform: translate(-50%, -50%) translateZ(20px);
+            box-shadow:
+                inset 0 0 0 3px rgba(255, 246, 229, 0.7),
+                0 8px 18px rgba(70, 46, 25, 0.24);
+        }
+
+        .xiangqi-piece.red {
+            color: #9b302f;
+            background: radial-gradient(circle at 30% 30%, #fff8ef, #efcfaa 72%);
+        }
+
+        .xiangqi-piece.black {
+            color: #26312e;
+            background: radial-gradient(circle at 30% 30%, #fff7eb, #ddc39c 72%);
         }
 
         .eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: var(--gold);
-            margin-bottom: 18px;
+            width: fit-content;
+            color: var(--mint);
+            margin-bottom: 16px;
         }
 
         .eyebrow::before {
             content: "";
-            width: 34px;
-            height: 1px;
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
             background: currentColor;
         }
 
         .hero-title {
-            max-width: 10ch;
-            font-size: clamp(3.2rem, 8vw, 6.8rem);
-            line-height: 0.92;
-            letter-spacing: -0.03em;
+            max-width: 12ch;
+            font-size: clamp(3.2rem, 8vw, 6.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.055em;
         }
 
         .hero-title em {
             font-style: normal;
-            color: var(--gold);
+            color: var(--mint);
         }
 
         .hero-desc {
-            max-width: 640px;
+            max-width: 620px;
             margin-top: 18px;
-            color: #d4cec5;
-            font-size: 1rem;
-            line-height: 1.8;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.9;
         }
 
         .hero-actions {
@@ -248,117 +399,121 @@
             padding: 0 18px;
             border-radius: 999px;
             border: 1px solid transparent;
-            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+            font-weight: 700;
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
         }
 
         .button.primary {
-            color: #18120b;
-            background: linear-gradient(135deg, #f2d08b, #d8ad51);
-            box-shadow: 0 12px 30px rgba(216, 173, 81, 0.24);
+            color: #ffffff;
+            background: var(--mint);
+            box-shadow: 0 14px 30px rgba(37, 130, 112, 0.24);
         }
 
         .button.secondary {
             border-color: var(--line);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text);
+            background: rgba(255, 255, 255, 0.58);
+            color: var(--ink);
         }
 
         .button:hover,
         .button:focus-visible,
         .card:hover,
         .card:focus-visible,
-        .spotlight:hover,
-        .spotlight:focus-visible {
+        .update-item:hover,
+        .update-item:focus-visible {
             transform: translateY(-3px);
         }
 
         .hero-meta {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
+            gap: 12px;
             margin-top: 30px;
         }
 
         .meta-box {
-            padding: 16px;
+            padding: 14px;
             border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.56);
         }
 
         .meta-box strong {
             display: block;
             margin-top: 8px;
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--text);
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .section-title {
-            font-size: 2rem;
-            letter-spacing: 0.02em;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: -0.035em;
         }
 
         .cards-header {
             display: flex;
             align-items: end;
             justify-content: space-between;
-            gap: 18px;
-            padding: 10px 4px 20px;
+            gap: 22px;
+            padding: 22px 4px;
         }
 
         .cards-header p {
-            max-width: 560px;
+            max-width: 600px;
+            margin-top: 8px;
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .pill-group {
             display: flex;
             flex-wrap: wrap;
+            justify-content: flex-end;
             gap: 10px;
         }
 
         .pill {
-            padding: 10px 14px;
+            padding: 10px 13px;
             border-radius: 999px;
             border: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.54);
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 16px;
         }
 
         .card {
             display: flex;
             flex-direction: column;
-            min-height: 250px;
-            padding: 24px;
-            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+            min-height: 246px;
+            grid-column: span 4;
+            padding: 22px;
+            border-radius: var(--radius-lg);
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
         }
 
         .card:hover,
         .card:focus-visible,
-        .spotlight:hover,
-        .spotlight:focus-visible {
+        .update-item:hover,
+        .update-item:focus-visible {
             border-color: var(--line-strong);
-            background: rgba(255, 255, 255, 0.055);
+            background: var(--paper-strong);
+            box-shadow: 0 22px 58px rgba(71, 88, 82, 0.18);
+            outline: none;
         }
 
         .card.featured {
-            grid-column: span 1;
-            min-height: 320px;
+            grid-column: span 6;
             background:
-                radial-gradient(circle at 90% 15%, rgba(232, 194, 112, 0.17), transparent 30%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 100%),
-                var(--panel-strong);
+                radial-gradient(circle at 92% 10%, rgba(37, 130, 112, 0.16), transparent 34%),
+                var(--paper-strong);
         }
 
         .card.compact {
-            grid-column: span 1;
+            grid-column: span 6;
         }
 
         .card-head {
@@ -369,29 +524,27 @@
         }
 
         .card-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             display: grid;
             place-items: center;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.04);
-            font-size: 1.25rem;
+            border-radius: 18px;
+            color: #ffffff;
+            font-weight: 700;
+            background: var(--accent, var(--mint));
         }
 
         .card h3 {
             margin-top: 26px;
-            font-family: "Cormorant Garamond", serif;
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
+            font-size: clamp(1.7rem, 3vw, 2.25rem);
+            letter-spacing: -0.025em;
         }
 
         .card p {
             margin-top: 10px;
             color: var(--muted);
-            line-height: 1.75;
-            font-size: 0.97rem;
+            line-height: 1.8;
+            font-size: 0.98rem;
         }
 
         .card-footer {
@@ -404,28 +557,24 @@
         }
 
         .card-link {
-            color: var(--gold);
+            color: var(--mint);
         }
 
         .card-tag {
             padding: 8px 12px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #d6d0c7;
+            color: var(--muted);
             font-size: 0.82rem;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(38, 49, 46, 0.06);
         }
 
         .updates-section {
-            margin-top: 34px;
+            margin-top: 36px;
         }
 
         .updates-panel {
-            padding: 28px;
-            background:
-                radial-gradient(circle at 8% 12%, rgba(232, 194, 112, 0.12), transparent 26%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 100%),
-                var(--panel-strong);
+            padding: 26px;
+            border-radius: var(--radius-xl);
         }
 
         .updates-top {
@@ -440,58 +589,49 @@
         .updates-top p {
             max-width: 620px;
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .updates-list {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 16px;
-            margin-top: 22px;
+            margin-top: 20px;
         }
 
         .update-item {
-            min-height: 210px;
-            padding: 22px;
-            background: rgba(255, 255, 255, 0.03);
-            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
-        }
-
-        .update-item:hover,
-        .update-item:focus-visible {
-            transform: translateY(-3px);
-            border-color: var(--line-strong);
-            background: rgba(255, 255, 255, 0.05);
+            min-height: 200px;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            box-shadow: none;
+            transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
         }
 
         .update-date {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: var(--gold);
-            font-size: 0.78rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
+            color: var(--sky);
         }
 
         .update-date::before {
             content: "";
-            width: 26px;
-            height: 1px;
+            width: 24px;
+            height: 2px;
+            border-radius: 999px;
             background: currentColor;
         }
 
         .update-item h3 {
             margin-top: 18px;
-            font-family: "Cormorant Garamond", serif;
-            font-size: 1.85rem;
-            font-weight: 600;
+            font-size: 1.45rem;
+            letter-spacing: -0.02em;
         }
 
         .update-item p {
             margin-top: 10px;
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .update-tag {
@@ -499,26 +639,30 @@
             margin-top: 18px;
             padding: 8px 12px;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            color: #d6d0c7;
+            background: var(--mint-soft);
+            color: var(--mint);
             font-size: 0.8rem;
+            font-weight: 700;
         }
 
         .footer-note {
             display: flex;
             justify-content: space-between;
             gap: 16px;
-            margin-top: 20px;
-            padding: 22px 6px 6px;
+            margin-top: 18px;
+            padding: 20px 6px 6px;
             color: var(--muted);
             font-size: 0.92rem;
         }
 
-        @media (max-width: 1080px) {
+        @media (max-width: 920px) {
+            .hero-panel {
+                grid-template-columns: 1fr;
+            }
+
             .card.featured,
             .card.compact {
-                grid-column: span 6;
+                grid-column: span 12;
             }
 
             .updates-list {
@@ -530,19 +674,39 @@
             .shell {
                 width: min(calc(100% - 20px), var(--max-width));
                 margin: 10px auto;
-                padding: 18px;
-                border-radius: 24px;
+                padding: 0;
             }
 
             .topbar,
             .cards-header,
+            .updates-top,
             .footer-note {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
+            .topbar {
+                position: static;
+                border-radius: 24px;
+            }
+
+            .status-panel,
+            .pill-group {
+                justify-content: flex-start;
+            }
+
+            .hero {
+                padding: 18px 0;
+            }
+
             .hero-panel,
             .updates-panel {
+                padding: 16px;
+                border-radius: 24px;
+            }
+
+            .hero-copy {
+                min-height: auto;
                 padding: 22px;
             }
 
@@ -552,19 +716,8 @@
             }
 
             .hero-meta,
-            .card-grid,
             .updates-list {
                 grid-template-columns: 1fr;
-            }
-
-            .card.featured,
-            .card.compact {
-                grid-column: span 1;
-            }
-
-            .updates-top {
-                flex-direction: column;
-                align-items: flex-start;
             }
         }
     </style>
@@ -573,10 +726,8 @@
     <main class="shell">
         <header class="topbar">
             <div class="brand">
-                <div class="brand-mark">WM</div>
                 <div class="brand-copy">
-                    <small>WebMainIndex</small>
-                    <h1>李金航-项目导航门户</h1>
+                    <h1>李金航-项目索引页</h1>
                 </div>
             </div>
             <div class="status-panel">
@@ -587,27 +738,51 @@
 
         <section class="hero">
             <article class="hero-panel">
-                <span class="eyebrow">Project Recommendation</span>
-                <h2 class="hero-title"><em>Easyplay</em></h2>
-                <p class="hero-desc">
-                    和朋友来一局中国象棋！
-                </p>
-                <div class="hero-actions">
-                    <a class="button primary" href="http://117.72.10.87:26002">进入 EasyPlay</a>
-                    <a class="button secondary" href="#module-entry">浏览其他项目</a>
+                <div class="hero-copy">
+                    <span class="eyebrow">Recommend Project</span>
+                    <h2 class="hero-title"><em>Easyplay</em></h2>
+                    <p class="hero-desc">
+                        Easyplay包括中国象棋、斗地主与多种经典单机游戏。
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="http://117.72.10.87:26002">进入 Easyplay</a>
+                        <a class="button secondary" href="#module-entry">浏览其他项目</a>
+                    </div>
+                    <div class="hero-meta">
+                        <div class="meta-box">
+                            <span class="meta-label">当前推荐</span>
+                            <strong>来一盘象棋！</strong>
+                        </div>
+                        <div class="meta-box">
+                            <span class="meta-label">核心内容</span>
+                            <strong>象棋 / 斗地主 / 单机玩法</strong>
+                        </div>
+                        <div class="meta-box">
+                            <span class="meta-label">项目目的</span>
+                            <strong>算法+docker部署+js开发</strong>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-meta">
-                    <div class="meta-box">
-                        <span class="meta-label">中国象棋</span>
-                        <strong>在线实时对局</strong>
-                    </div>
-                    <div class="meta-box">
-                        <span class="meta-label">斗地主</span>
-                        <strong>互动娱乐体验</strong>
-                    </div>
-                    <div class="meta-box">
-                        <span class="meta-label">单机游戏</span>
-                        <strong>重温经典</strong>
+                <div class="hero-board">
+                    <div class="xiangqi-stage">
+                        <div class="xiangqi-copy">
+                            <strong>Easyplay--中国象棋</strong>
+                            <span>可以对弈，可以断线重连，可以掀翻棋盘，拂袖而去。</span>
+                        </div>
+                        <div class="xiangqi-scene" aria-hidden="true">
+                            <div class="xiangqi-board">
+                                <span class="xiangqi-piece red" style="--x: 12%; --y: 14%;">车</span>
+                                <span class="xiangqi-piece red" style="--x: 50%; --y: 14%;">帅</span>
+                                <span class="xiangqi-piece red" style="--x: 88%; --y: 14%;">马</span>
+                                <span class="xiangqi-piece red" style="--x: 25%; --y: 31%;">炮</span>
+                                <span class="xiangqi-piece red" style="--x: 75%; --y: 31%;">兵</span>
+                                <span class="xiangqi-piece black" style="--x: 14%; --y: 86%;">车</span>
+                                <span class="xiangqi-piece black" style="--x: 50%; --y: 86%;">将</span>
+                                <span class="xiangqi-piece black" style="--x: 86%; --y: 86%;">马</span>
+                                <span class="xiangqi-piece black" style="--x: 30%; --y: 69%;">炮</span>
+                                <span class="xiangqi-piece black" style="--x: 70%; --y: 69%;">卒</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -616,67 +791,67 @@
         <section id="module-entry">
             <div class="cards-header">
                 <div>
-                    <span class="eyebrow">Project Access</span>
+                    <span class="eyebrow">Project Modules</span>
                     <h2 class="section-title">项目入口</h2>
-                    <p>点击项目名称进入您感兴趣的项目详情页。</p>
+                    <p>全部项目的入口。</p>
                 </div>
                 <div class="pill-group">
-                    <span class="pill">Portal Index</span>
-                    <span class="pill">Visual Refresh</span>
-                    <span class="pill">Responsive Ready</span>
+                    <span class="pill">小游戏</span>
+                    <span class="pill">实用工具</span>
+                    <span class="pill">开发测试</span>
                 </div>
             </div>
 
             <div class="card-grid">
-                <a class="card featured" href="http://117.72.10.87:26002">
+                <a class="card featured" href="http://117.72.10.87:26002" style="--accent: var(--mint);">
                     <div class="card-head">
-                        <span class="card-index">01 / Featured</span>
+                        <span class="card-index">01 / Game</span>
                         <div class="card-icon">EP</div>
                     </div>
-                    <h3>EasyPlay</h3>
-                    <p>小游戏算法实现。</p>
+                    <h3>Easyplay</h3>
+                    <p>包括中国象棋、斗地主与多种经典单机游戏。</p>
                     <div class="card-footer">
-                        <span class="card-link">Launch Project</span>
-                        <span class="card-tag">Web App</span>
+                        <span class="card-link">进入项目</span>
+                        <span class="card-tag">已上线</span>
                     </div>
                 </a>
 
-                <a class="card compact" href="./26-005ImageProcesser/frontend/index.html">
+                <a class="card compact" href="./26-005ImageProcesser/frontend/index.html" style="--accent: var(--sky);">
                     <div class="card-head">
                         <span class="card-index">02 / Tool</span>
                         <div class="card-icon">IP</div>
                     </div>
                     <h3>基础图像处理器</h3>
-                    <p>用于图像基础操作和处理流程测试。</p>
+                    <p>用于图像基础操作和处理流程测试，适合作为工具型项目的快速访问入口。</p>
                     <div class="card-footer">
-                        <span class="card-link">Open Module</span>
-                        <span class="card-tag">Utility</span>
+                        <span class="card-link">进入项目</span>
+                        <span class="card-tag">已上线</span>
                     </div>
                 </a>
 
-                <a class="card compact" href="./26-004JavaCoder/frontend/index.html">
+                <a class="card compact" href="./26-004JavaCoder/frontend/index.html" style="--accent: var(--rose);">
                     <div class="card-head">
-                        <span class="card-index">03 / Build</span>
+                        <span class="card-index">03 / Judge</span>
                         <div class="card-icon">JC</div>
                     </div>
                     <h3>代码自动判题平台</h3>
-                    <p>用于代码提交、判题与平台验证，当前仍在测试阶段。</p>
+                    <p>用于代码提交、判题与平台验证，适合作为开发测试类项目入口。</p>
                     <div class="card-footer">
-                        <span class="card-link">Open Module</span>
-                        <span class="card-tag">Testing</span>
+                        <span class="card-link">进入项目</span>
+                        <span class="card-tag">测试中</span>
                     </div>
                 </a>
 
-                <a class="card compact" href="/RateConverter">
+                <a class="card compact" href="/RateConverter" style="--accent: var(--lavender);">
                     <div class="card-head">
                         <span class="card-index">04 / Service</span>
                         <div class="card-icon">RC</div>
                     </div>
                     <h3>货币汇率转换器</h3>
-                    <p>实时汇率换算服务，适合做快捷工具型访问入口。</p>
+                    <p>实时汇率换算服务，适合作为快捷工具型项目的独立访问入口。</p>
                     <div class="card-footer">
-                        <span class="card-link">Open Module</span>
-                        <span class="card-tag">Live Data</span>
+                        <span class="card-link">进入项目</span>
+                        <span class="card-tag">已上线</span>
                     </div>
                 </a>
             </div>
@@ -687,9 +862,9 @@
                 <div class="updates-top">
                     <div>
                         <span class="eyebrow">Recent Changes</span>
-                        <h2 class="section-title">更新</h2>
+                        <h2 class="section-title">更新记录</h2>
                     </div>
-                    <p>更新记录已改为独立 JSON 数据源驱动，后续只需维护数据文件，就能同步刷新首页中的变更日志内容。</p>
+                    <p>更新记录由独立 JSON 数据源驱动。</p>
                 </div>
 
                 <div class="updates-list" id="updatesList">
@@ -704,7 +879,7 @@
         </section>
 
         <footer class="footer-note">
-            <span>Designed as a curated launchpad for your local and remote web projects.</span>
+            <span>欢迎您提出宝贵的整改建议。</span>
             <span id="statusDate">--</span>
         </footer>
     </main>
