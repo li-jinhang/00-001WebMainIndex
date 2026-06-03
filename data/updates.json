@@ -1,5 +1,11 @@
 [
     {
+        "date": "2026.06.03",
+        "title": "JavaCoder内测",
+        "description": "部署JavaCoder前后端",
+        "tag": "JavaCoder 0.0.0"
+    },
+    {
         "date": "2026.06.01",
         "title": "首页上线",
         "description": "首页正式上线，提供项目入口。",
@@ -9,12 +15,6 @@
         "date": "2026.05.28",
         "title": "首页视觉重构",
         "description": "UI改为更活跃的浅色设计。",
-        "tag": "MainIndex 0.0.0"
-    },
-    {
-        "date": "2026.04",
-        "title": "初步测试",
-        "description": "完成云服务器，bt，项目部署技术测试。",
         "tag": "MainIndex 0.0.0"
     }
 ]
